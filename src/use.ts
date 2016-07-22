@@ -29,6 +29,8 @@ export class Use implements IUse {
     if (!this.options.devDependencies) {
       this.options.devDependencies = true;
     }
+
+    this.use = this.use.bind(this);
   }
 
   public use(...modules: string[]): any {
