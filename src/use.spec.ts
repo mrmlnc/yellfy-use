@@ -1,0 +1,70 @@
+'use strict';
+
+import * as assert from 'assert';
+
+import { Use } from './use';
+
+describe('Dependencies', () => {
+
+  it('Should work with default settings.', () => {
+    const $ = new Use({ gulp: null }).use('mocha');
+
+    assert.ok($.mocha);
+  });
+
+  it('Should work with all the dependencies.', () => {
+    const $ = new Use({ gulp: null, dependencies: true }).use('chalk');
+
+    assert.ok($.chalk);
+  });
+
+  it('Should work with multiple dependencies.', () => {
+    const $ = new Use({ gulp: null, dependencies: true }).use('mocha', 'chalk');
+
+    assert.ok($.mocha && $.chalk);
+  });
+
+  it('Should remove the prefix of the name of the plugin.', () => {
+    const $ = new Use({ gulp: null }).use('gulp-tap');
+
+    assert.ok($.tap);
+  });
+
+  it('Should work with a custom reporter.', () => {
+    const loader = new Use({
+      gulp: null,
+      reporter: (toInstall) => {
+        assert.equal(toInstall.length, 2);
+      }
+    });
+
+    loader.use('yellfy', 'pikachu');
+  });
+
+});
+
+describe('Helpers', () => {
+
+  it('Should fail if directory of the helpers does not exist.', () => {
+    try {
+      new Use({ gulp: null, helperDir: './notExists' }).use('gulp-tap');
+    } catch (err) {
+      assert.ok(err.message.indexOf('Helpers are not loaded.') !== -1);
+    }
+  });
+
+  it('Should successfully load helpers.', () => {
+    const $ = new Use({ gulp: null, helperDir: './test/success' }).use('gulp-tap');
+
+    assert.ok($._.logger);
+  });
+
+  it('Should fail when loading the helper that contains the error.', () => {
+    try {
+      new Use({ gulp: null, helperDir: './test/fail' }).use('gulp-tap');
+    } catch (err) {
+      assert.ok(err.message.indexOf('An error occurred while loading the package') !== -1);
+    }
+  });
+
+});

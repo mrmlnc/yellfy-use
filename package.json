@@ -1,0 +1,42 @@
+{
+  "name": "yellfy-use",
+  "version": "1.0.0-alpha.0",
+  "description": "User-friendly require function for Yellfy project",
+  "license": "MIT",
+  "repository": "mrmlnc/yellfy-use",
+  "author": {
+    "name": "Denis Malinochkin",
+    "url": "canonium.com"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "pretest": "rimraf out && tslint src/**/* && tsc",
+    "test": "mocha out/**/*.spec.js",
+    "prepublish": "npm run test",
+    "start": "rimraf out && tsc --watch"
+  },
+  "main": "./out/use.js",
+  "typings": "./out/use.d.ts",
+  "files": [
+    "./out/use.js",
+    "./out/use.d.ts"
+  ],
+  "keywords": [
+    "yellfy",
+    "require",
+    "use"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.0",
+    "camelcase": "^3.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.5.0",
+    "typescript": "^1.8.0",
+    "tslint": "^3.13.0",
+    "mocha": "^2.5.0",
+    "gulp-tap": "^0.1.0"
+  }
+}
