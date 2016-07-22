@@ -17,11 +17,11 @@
     "prepublish": "npm run test",
     "start": "rimraf out && tsc --watch"
   },
-  "main": "./out/use.js",
-  "typings": "./out/use.d.ts",
+  "main": "out/use.js",
+  "typings": "out/use.d.ts",
   "files": [
-    "./out/use.js",
-    "./out/use.d.ts"
+    "out/use.js",
+    "out/use.d.ts"
   ],
   "keywords": [
     "yellfy",
