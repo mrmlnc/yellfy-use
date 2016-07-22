@@ -13,15 +13,15 @@ describe('Dependencies', () => {
   });
 
   it('Should work with all the dependencies.', () => {
-    const $ = new Use({ gulp: null, dependencies: true }).use('chalk');
+    const $ = new Use({ gulp: null, dependencies: true }).use('tslint');
 
-    assert.ok($.chalk);
+    assert.ok($.tslint);
   });
 
   it('Should work with multiple dependencies.', () => {
-    const $ = new Use({ gulp: null, dependencies: true }).use('mocha', 'chalk');
+    const $ = new Use({ gulp: null, dependencies: true }).use('mocha', 'tslint');
 
-    assert.ok($.mocha && $.chalk);
+    assert.ok($.mocha && $.tslint);
   });
 
   it('Should remove the prefix of the name of the plugin.', () => {
