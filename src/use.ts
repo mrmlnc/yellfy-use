@@ -3,7 +3,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as camelcase from 'camelcase';
-import * as chalk from 'chalk';
 
 export interface IUseOptions {
   gulp: any;
@@ -92,7 +91,7 @@ export class Use implements IUse {
   }
 
   private reporter(toInstall: string[]): void {
-    console.log(`${chalk.red('>>')} Use 'npm i -D %s'`, toInstall.join(' '));
+    console.error(`Something is not enough. Use 'npm i -D %s'`, toInstall.join(' '));
   }
 
   private renameModuleName(name: string): string {
