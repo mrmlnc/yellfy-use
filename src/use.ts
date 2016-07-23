@@ -111,17 +111,22 @@ export class Use implements IUse {
     }
 
     const projectHelpers: any = {};
-    files.forEach((file) => {
-      const basename = path.basename(file, '.js');
+    for (let index = 0; index < files.length; index++) {
+      const isFile = path.extname(files[index]) === '.js';
+      if (!isFile) {
+        continue;
+      }
+
+      const basename = path.basename(files[index], '.js');
       const helperName = this.renameModuleName(basename);
-      const helperPath = path.join(process.cwd(), this.options.helperDir, file);
+      const helperPath = path.join(process.cwd(), this.options.helperDir, basename);
 
       try {
         projectHelpers[helperName] = require(helperPath);
       } catch (err) {
         throw new Error(`An error occurred while loading the package: ${err.message}`);
       }
-    });
+    }
 
     return projectHelpers;
   }
