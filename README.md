@@ -13,7 +13,7 @@ $ npm i -D yellfy-use
 ## Usage
 
 ```js
-const Use = require('yellfy-use');
+const { Use } = require('yellfy-use');
 
 global.use = new Use({
   gulp: require('gulp')
