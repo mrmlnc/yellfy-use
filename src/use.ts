@@ -68,14 +68,14 @@ export class Use implements IUse {
     try {
       fileData = fs.readFileSync('./package.json', 'utf8');
     } catch (err) {
-      throw new Error(`Unable to read 'package.json' file. Error: ${err}`);
+      throw new Error(`Unable to read 'package.json' file. Error: ${err.message}`);
     }
 
     let packageJsonData: any = {};
     try {
       packageJsonData = JSON.parse(fileData);
     } catch (err) {
-      throw new Error(`JSON Parsing Error: ${err}`);
+      throw new Error(`JSON Parsing Error: ${err.message}`);
     }
 
     let packageDependencies: string[] = [];
@@ -107,7 +107,7 @@ export class Use implements IUse {
     try {
       files = fs.readdirSync(this.options.helperDir);
     } catch (err) {
-      throw new Error(`Helpers are not loaded. Error: ${err}`);
+      throw new Error(`Helpers are not loaded. Error: ${err.message}`);
     }
 
     const projectHelpers: any = {};
@@ -119,7 +119,7 @@ export class Use implements IUse {
       try {
         projectHelpers[helperName] = require(helperPath);
       } catch (err) {
-        throw new Error(`An error occurred while loading the package: ${err}`);
+        throw new Error(`An error occurred while loading the package: ${err.message}`);
       }
     });
 
