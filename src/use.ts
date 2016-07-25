@@ -47,7 +47,7 @@ export class Use implements IUse {
 
     const deps: any = {
       gulp: this.options.gulp,
-      _: projectHelpers
+      helpers: projectHelpers
     };
 
     modules.forEach((dep) => {

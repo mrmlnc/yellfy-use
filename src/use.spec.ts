@@ -56,7 +56,7 @@ describe('Helpers', () => {
   it('Should successfully load helpers.', () => {
     const $ = new Use({ gulp: null, helperDir: './test/success' }).use('gulp-tap');
 
-    assert.ok($._.logger);
+    assert.ok($.helpers.logger);
   });
 
   it('Should fail when loading the helper that contains the error.', () => {
