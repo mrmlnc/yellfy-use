@@ -18,6 +18,9 @@ export interface IUse {
 
 export class Use implements IUse {
 
+  private projectDependencies: any = [];
+  private projectHelpers: any = [];
+
   constructor(public options: IUseOptions) {
     if (!this.options.reporter) {
       this.options.reporter = this.reporter;
@@ -29,25 +32,24 @@ export class Use implements IUse {
       this.options.devDependencies = true;
     }
 
+    this.projectDependencies = this.getProjectDependencies();
+    this.projectHelpers = this.getProjectHelpers();
+
     this.use = this.use.bind(this);
   }
 
   public use(...modules: string[]): any {
-    const projectDependencies = this.getProjectDependencies();
-
     const toInstall = modules.filter((dep) => {
-      return projectDependencies.indexOf(dep) === -1;
+      return this.projectDependencies.indexOf(dep) === -1;
     });
 
     if (toInstall.length) {
       return this.options.reporter(toInstall);
     }
 
-    const projectHelpers = this.getProjectHelpers();
-
     const deps: any = {
       gulp: this.options.gulp,
-      helpers: projectHelpers
+      helpers: this.projectHelpers
     };
 
     modules.forEach((dep) => {

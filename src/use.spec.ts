@@ -24,7 +24,7 @@ describe('Dependencies', () => {
     assert.ok($.mocha && $.tslint);
   });
 
-  it('Should remove the prefix of the name of the plugin.', () => {
+  it('Should remove the prefix name of the plugin.', () => {
     const $ = new Use({ gulp: null }).use('gulp-tap');
 
     assert.ok($.tap);
