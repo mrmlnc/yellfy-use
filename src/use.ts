@@ -18,8 +18,8 @@ export interface IUse {
 
 export class Use implements IUse {
 
-  private projectDependencies: any = [];
-  private projectHelpers: any = [];
+  private projectDependencies: any;
+  private projectHelpers: any;
 
   constructor(public options: IUseOptions) {
     if (!this.options.reporter) {
@@ -44,7 +44,7 @@ export class Use implements IUse {
     });
 
     if (toInstall.length) {
-      return this.options.reporter(toInstall);
+      this.options.reporter(toInstall);
     }
 
     const deps: any = {
@@ -58,7 +58,7 @@ export class Use implements IUse {
       try {
         deps[name] = require(dep);
       } catch (err) {
-        return this.options.reporter([dep]);
+        // silence
       }
     });
 
