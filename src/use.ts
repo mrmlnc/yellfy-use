@@ -10,6 +10,7 @@ export interface IUseOptions {
   devDependencies?: boolean;
   helperDir?: string;
   reporter?: (toInstall: string[]) => void;
+  packageFile?: string;
 }
 
 export interface IUse {
@@ -22,15 +23,12 @@ export class Use implements IUse {
   private projectHelpers: any;
 
   constructor(public options: IUseOptions) {
-    if (!this.options.reporter) {
-      this.options.reporter = this.reporter;
-    }
-    if (!this.options.dependencies) {
-      this.options.dependencies = false;
-    }
-    if (!this.options.devDependencies) {
-      this.options.devDependencies = true;
-    }
+    this.options = Object.assign({
+      reporter: this.reporter,
+      dependencies: false,
+      devDependencies: true,
+      packageFile: './package.json'
+    }, options);
 
     this.projectDependencies = this.getProjectDependencies();
     this.projectHelpers = this.getProjectHelpers();
@@ -69,7 +67,7 @@ export class Use implements IUse {
   private getProjectDependencies(): string[] {
     let fileData: string;
     try {
-      fileData = fs.readFileSync('./package.json', 'utf8');
+      fileData = fs.readFileSync(this.options.packageFile, 'utf8');
     } catch (err) {
       throw new Error(`Unable to read 'package.json' file. Error: ${err.message}`);
     }
