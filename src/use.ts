@@ -23,7 +23,8 @@ export class Use implements IUse {
   private projectHelpers: any;
 
   constructor(public options: IUseOptions) {
-    this.options = Object.assign({
+    const object = <any>Object;
+    this.options = object.assign({
       reporter: this.reporter,
       dependencies: false,
       devDependencies: true,
