@@ -30,6 +30,12 @@ describe('Dependencies', () => {
     assert.ok($.tap);
   });
 
+  it('Should rename the dependency, as the user wants.', () => {
+    const $ = new Use({ gulp: null }).use('gulp-tap as custom-Tap');
+
+    assert.ok($['custom-Tap']);
+  });
+
   it('Should work with a custom reporter.', () => {
     const loader = new Use({
       gulp: null,

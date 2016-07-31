@@ -10,23 +10,27 @@
 $ npm i -D yellfy-use
 ```
 
+## Why?
+
+In order to describe dependencies of tasks easier. Without `const` and `require`.
+
 ## Usage
 
 ```js
-const { Use } = require('yellfy-use');
+const gulp = require('gulp');
+const Use = require('yellfy-use');
 
-global.use = new Use({
-  gulp: require('gulp')
-}).use;
+global.use = new Use(gulp).use;
 
-const $ = use('gulp-less', 'camelcase');
+const $ = use('gulp-less', 'camelcase', 'very-long-name as shortName');
 
 console.log($);
 // {
 //   gulp: [function],
 //   _: {},
 //   less: [function],
-//   camelcase: [function]
+//   camelcase: [function],
+//   shortName: [function]
 // }
 ```
 

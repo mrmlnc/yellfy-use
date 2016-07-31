@@ -39,30 +39,31 @@ export class Use implements IUse {
   }
 
   public use(...modules: string[]): any {
-    const toInstall = modules.filter((dep) => {
-      return this.projectDependencies.indexOf(dep) === -1;
+    const toInstall = modules.filter((dependency) => {
+      dependency = dependency.replace(/\sas\s.*/, '');
+      return this.projectDependencies.indexOf(dependency) === -1;
     });
 
     if (toInstall.length) {
       this.options.reporter(toInstall);
     }
 
-    const deps: any = {
+    const dependencies: any = {
       gulp: this.options.gulp,
       helpers: this.projectHelpers
     };
 
-    modules.forEach((dep) => {
-      const name = this.renameModuleName(dep);
-
+    modules.forEach((dependency) => {
+      const name = this.renameModuleName(dependency);
+      const toRequire = dependency.replace(/\sas\s.*/, '');
       try {
-        deps[name] = require(dep);
+        dependencies[name] = require(toRequire);
       } catch (err) {
         // silence
       }
     });
 
-    return deps;
+    return dependencies;
   }
 
   private getProjectDependencies(): string[] {
@@ -97,6 +98,11 @@ export class Use implements IUse {
   }
 
   private renameModuleName(name: string): string {
+    const newName = /\sas\s(.*)/.exec(name);
+    if (newName) {
+      return newName[1];
+    }
+
     return camelcase(name.replace(/^gulp(-|\.)/, ''));
   }
 
