@@ -38,10 +38,14 @@ export class Use implements IUse {
   }
 
   public use(...modules: string[]): any {
-    const toInstall = modules.filter((dependency) => {
-      dependency = dependency.replace(/\sas\s.*/, '');
-      return this.projectDependencies.indexOf(dependency) === -1;
-    });
+    const toInstall: string[] = [];
+
+    for (let index = 0; index < modules.length; index++) {
+      const dependency = modules[index].replace(/\sas\s.*/, '');
+      if (this.projectDependencies.indexOf(dependency) === -1) {
+        toInstall.push(dependency);
+      }
+    }
 
     if (toInstall.length) {
       this.options.reporter(toInstall);

@@ -41,10 +41,11 @@ describe('Dependencies', () => {
       gulp: null,
       reporter: (toInstall) => {
         assert.equal(toInstall.length, 2);
+        assert.ok(toInstall.indexOf('pikachu') !== -1);
       }
     });
 
-    loader.use('yellfy', 'pikachu');
+    loader.use('yellfy', 'pikachu as error');
   });
 
 });
