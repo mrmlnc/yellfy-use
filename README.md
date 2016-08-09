@@ -17,8 +17,9 @@ In order to describe dependencies of tasks easier. Without `const` and `require`
 ## Usage
 
 ```js
+// npm i -D gulpjs/gulp#4.0 yellfy-use
 const gulp = require('gulp');
-const Use = require('yellfy-use');
+const { Use } = require('yellfy-use');
 
 global.use = new Use(gulp).use;
 
@@ -53,7 +54,7 @@ Check dependencies in the `dependencies` section.
 **devDependencies**
 
   * Type: `Boolean`
-  * Default: `false`
+  * Default: `true`
 
 Check dependencies in the `devDependencies` section.
 
