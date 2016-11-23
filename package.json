@@ -34,7 +34,7 @@
   "devDependencies": {
     "rimraf": "^2.5.0",
     "typescript": "^2.0.3",
-    "tslint": "^3.13.0",
+    "tslint": "^4.0.2",
     "mocha": "^3.0.1",
     "gulp-tap": "^0.1.0"
   }
