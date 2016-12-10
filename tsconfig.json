@@ -1,12 +1,16 @@
 {
 	"compilerOptions": {
-		"target": "es6",
+		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"rootDir": "src",
 		"outDir": "out",
 		"forceConsistentCasingInFileNames": true,
 		"removeComments": true,
-		"declaration": true
+		"declaration": true,
+		"lib": [
+			"es5",
+			"es2015.core"
+		]
 	}
 }
