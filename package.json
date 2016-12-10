@@ -11,6 +11,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
+  "main": "out/use.js",
   "typings": "out/use.d.ts",
   "files": [
     "index.js",
