@@ -19,9 +19,13 @@ In order to describe dependencies of tasks easier. Without `const` and `require`
 ```js
 // npm i -D gulpjs/gulp#4.0 yellfy-use
 const gulp = require('gulp');
-const { Use } = require('yellfy-use');
+const use = require('yellfy-use');
 
-global.use = new Use(gulp).use;
+use.setup({
+	gulp: gulp
+});
+
+// or global.use = new use.Use({ gulp: gulp }).use;
 
 const $ = use('gulp-less', 'camelcase', 'very-long-name as shortName');
 

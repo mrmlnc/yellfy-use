@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as camelcase from 'camelcase';
 
-export interface IUseOptions {
+export interface IOptions {
 	gulp: any;
 	dependencies?: boolean;
 	devDependencies?: boolean;
@@ -13,18 +13,14 @@ export interface IUseOptions {
 	packageFile?: string;
 }
 
-export interface IUse {
-	options?: IUseOptions;
-}
-
-export class Use implements IUse {
+export class Use {
 
 	private projectDependencies: any;
 	private projectHelpers: any;
 
-	constructor(public options: IUseOptions) {
-		const object = <any>Object;
-		this.options = object.assign({
+	constructor(public options: IOptions) {
+		this.options = Object.assign(<IOptions>{
+			gulp: null,
 			reporter: this.reporter,
 			dependencies: false,
 			devDependencies: true,
@@ -142,4 +138,8 @@ export class Use implements IUse {
 		return projectHelpers;
 	}
 
+}
+
+export function setup(options: IOptions): void {
+	(<any>global).use = new Use(options).use;
 }
