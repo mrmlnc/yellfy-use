@@ -11,12 +11,6 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "scripts": {
-    "pretest": "rimraf out && tslint src/**/* && tsc",
-    "test": "mocha out/**/*.spec.js",
-    "prepublish": "npm run test",
-    "start": "rimraf out && tsc --watch"
-  },
   "main": "out/use.js",
   "typings": "out/use.d.ts",
   "files": [
@@ -37,5 +31,13 @@
     "tslint": "^3.13.0",
     "mocha": "^3.0.1",
     "gulp-tap": "^0.1.0"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "lint": "tslint src/**/*.ts",
+    "compile": "tsc",
+    "test": "rimraf .tmp && mocha out/**/*.spec.js",
+    "build": "npm run clean && npm run lint && npm run compile && npm test ",
+    "watch": "npm run clean && npm run lint && npm run compile -- --sourceMap --watch"
   }
 }
