@@ -26,11 +26,14 @@
     "camelcase": "^3.0.0"
   },
   "devDependencies": {
-    "rimraf": "^2.5.0",
-    "typescript": "^2.0.3",
-    "tslint": "^3.13.0",
+    "@types/camelcase": "0.0.30",
+    "@types/mocha": "^2.2.33",
+    "@types/node": "0.0.2",
+    "gulp-tap": "^0.1.0",
     "mocha": "^3.0.1",
-    "gulp-tap": "^0.1.0"
+    "rimraf": "^2.5.0",
+    "tslint": "^3.13.0",
+    "typescript": "^2.0.3"
   },
   "scripts": {
     "clean": "rimraf out",
