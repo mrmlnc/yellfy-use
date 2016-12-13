@@ -32,7 +32,8 @@ const $ = use('gulp-less', 'camelcase', 'very-long-name as shortName');
 console.log($);
 // {
 //   gulp: [function],
-//   _: {},
+//   helpers: {},
+//   configs: {},
 //   less: [function],
 //   camelcase: [function],
 //   shortName: [function]
@@ -64,10 +65,18 @@ Check dependencies in the `devDependencies` section.
 
 **helperDir**
 
-  * Type: `Boolean`
-  * Default: `false`
+  * Type: `String`
+  * Default: `null`
 
-The directory that helpers are located in.
+The directory which contains the helper files.
+
+**configDir**
+
+  * Type: `String`
+  * Default: `null`
+
+The directory which contains the configuration files.
+
 
 **reporter**
 

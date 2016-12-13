@@ -9,6 +9,7 @@ export interface IOptions {
 	dependencies?: boolean;
 	devDependencies?: boolean;
 	helperDir?: string;
+	configDir?: string;
 	reporter?: (toInstall: string[]) => void;
 	packageFile?: string;
 }
@@ -17,6 +18,7 @@ export class Use {
 
 	private projectDependencies: any;
 	private projectHelpers: any;
+	private projectConfigs: any;
 
 	constructor(public options: IOptions) {
 		this.options = Object.assign(<IOptions>{
@@ -28,7 +30,8 @@ export class Use {
 		}, options);
 
 		this.projectDependencies = this.getProjectDependencies();
-		this.projectHelpers = this.getProjectHelpers();
+		this.projectHelpers = this.getProjectDirectories('helper');
+		this.projectConfigs = this.getProjectDirectories('config');
 
 		this.use = this.use.bind(this);
 	}
@@ -49,7 +52,8 @@ export class Use {
 
 		const dependencies: any = {
 			gulp: this.options.gulp,
-			helpers: this.projectHelpers
+			helpers: this.projectHelpers,
+			configs: this.projectConfigs
 		};
 
 		modules.forEach((dependency) => {
@@ -105,19 +109,20 @@ export class Use {
 		return camelcase(name.replace(/^gulp(-|\.)/, ''));
 	}
 
-	private getProjectHelpers(): any {
-		if (!this.options.helperDir) {
+	private getProjectDirectories(type: string): any {
+		const dirPath = this.options[type + 'Dir'];
+		if (!dirPath) {
 			return {};
 		}
 
 		let files: string[];
 		try {
-			files = fs.readdirSync(this.options.helperDir);
+			files = fs.readdirSync(dirPath);
 		} catch (err) {
-			throw new Error(`Helpers are not loaded. Error: ${err.message}`);
+			throw new Error(`The "${type}s" are not loaded. Error: ${err.message}`);
 		}
 
-		const projectHelpers: any = {};
+		const symbols: any = {};
 		for (let index = 0; index < files.length; index++) {
 			const isFile = path.extname(files[index]) === '.js';
 			if (!isFile) {
@@ -125,17 +130,17 @@ export class Use {
 			}
 
 			const basename = path.basename(files[index], '.js');
-			const helperName = this.renameModuleName(basename);
-			const helperPath = path.join(process.cwd(), this.options.helperDir, basename);
+			const name = this.renameModuleName(basename);
+			const filepath = path.join(process.cwd(), dirPath, basename);
 
 			try {
-				projectHelpers[helperName] = require(helperPath);
+				symbols[name] = require(filepath);
 			} catch (err) {
-				throw new Error(`An error occurred while loading the package: ${err.message}`);
+				throw new Error(`An error occurred while loading the "${type}s": ${err.message}`);
 			}
 		}
 
-		return projectHelpers;
+		return symbols;
 	}
 
 }

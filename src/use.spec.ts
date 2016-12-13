@@ -56,7 +56,7 @@ describe('Helpers', () => {
 		try {
 			new Use({ gulp: null, helperDir: './notExists' }).use('gulp-tap');
 		} catch (err) {
-			assert.ok(err.message.indexOf('Helpers are not loaded.') !== -1);
+			assert.ok(err.message.indexOf('The "helpers" are not loaded.') !== -1);
 		}
 	});
 
@@ -70,7 +70,7 @@ describe('Helpers', () => {
 		try {
 			new Use({ gulp: null, helperDir: './test/fail' }).use('gulp-tap');
 		} catch (err) {
-			assert.ok(err.message.indexOf('An error occurred while loading the package') !== -1);
+			assert.ok(err.message.indexOf('An error occurred while loading the "helpers"') !== -1);
 		}
 	});
 
