@@ -34,7 +34,7 @@
     "mocha": "^3.0.1",
     "rimraf": "^2.5.0",
     "tslint": "^3.13.0",
-    "typescript": "^2.0.3"
+    "typescript": "^2.1.5"
   },
   "scripts": {
     "clean": "rimraf out",
