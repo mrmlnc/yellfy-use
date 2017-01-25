@@ -33,7 +33,7 @@
     "gulp-tap": "^0.1.0",
     "mocha": "^3.0.1",
     "rimraf": "^2.5.0",
-    "tslint": "^3.13.0",
+    "tslint": "^4.4.1",
     "typescript": "^2.0.3"
   },
   "scripts": {
