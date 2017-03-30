@@ -24,7 +24,7 @@
     "use"
   ],
   "dependencies": {
-    "camelcase": "^4.0.0"
+    "camelcase": "^4.1.0"
   },
   "devDependencies": {
     "@types/camelcase": "0.0.30",
