@@ -30,7 +30,7 @@
     "@types/camelcase": "0.0.30",
     "@types/mocha": "^2.2.33",
     "@types/node": "0.0.2",
-    "gulp-tap": "^0.1.0",
+    "gulp-tap": "^0.4.1",
     "mocha": "^3.0.1",
     "rimraf": "^2.5.0",
     "tslint": "^3.13.0",
