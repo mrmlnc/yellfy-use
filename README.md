@@ -1,5 +1,7 @@
 # yellfy-use
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mrmlnc/yellfy-use.svg)](https://greenkeeper.io/)
+
 > User-friendly `require` function for Yellfy project.
 
 [![Travis Status](https://travis-ci.org/mrmlnc/yellfy-use.svg?branch=master)](https://travis-ci.org/mrmlnc/yellfy-use)
